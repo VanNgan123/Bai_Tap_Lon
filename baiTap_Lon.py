@@ -16,10 +16,12 @@ loaiXe = "1"
 
 def tra_cuu_phat_nguoi():
     print("bắt đầu kiểm tra: ", bienSo)
+    #1.Vào website đã chọn
     driver = webdriver.Chrome()
     driver.get("https://www.csgt.vn/tra-cuu-phuong-tien-vi-pham.html")
     time.sleep(2)
     while True:
+        #2.Nhập các thông tin Biển số xe, chọn loại phương tiện, nhập mã bảo mật, bấm tìm kiếm.
         driver.find_element(By.NAME, "BienKiemSoat").clear()
         driver.find_element(By.NAME, "BienKiemSoat").send_keys(bienSo)
         Select(driver.find_element(By.NAME, "LoaiXe")).select_by_value(loaiXe)
@@ -36,6 +38,7 @@ def tra_cuu_phat_nguoi():
         captcha_input.send_keys(captcha_text)
         driver.find_element(By.CLASS_NAME, "btnTraCuu").click()
         time.sleep(3)
+        #3. Kiểm tra kết quả phạt nguội.
         try:
             result = driver.find_element(By.ID, "bodyPrint123")
             thoi_gian = result.find_element(By.XPATH, "//*[@id='bodyPrint123']/div[4]/div/div").text
@@ -43,17 +46,18 @@ def tra_cuu_phat_nguoi():
             trang_thai = result.find_element(By.XPATH, "//*[@id='bodyPrint123']/div[7]/div/div/span").text
             print("thời gian vi phạm:", thoi_gian)
             print("hành vi vi phạm:", hanh_vi)
-            print("trạng thái vi phạm:", trang_thai)
+            print("trạng thái vi phạm:", trang_thai)    
             break
         except Exception as e:
             print("Captcha sai or ko lấy được kết quả, thử lại...")
-            driver.refresh() 
+            driver.refresh()
             time.sleep(2)
             continue
     driver.quit()
 
-schedule.every().day.at("17:48").do(tra_cuu_phat_nguoi)
-schedule.every().day.at("17:04").do(tra_cuu_phat_nguoi)
+#4. Set lịch chạy 6h sáng và 12h trưa hằng ngày.
+schedule.every().day.at("6:00").do(tra_cuu_phat_nguoi)
+schedule.every().day.at("12:00").do(tra_cuu_phat_nguoi)
 
 if __name__ == "__main__":
     print("Đang chạy")
