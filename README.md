@@ -32,13 +32,13 @@ pip install selenium pillow pytesseract schedule requests
 
 ## Mô tả về ý tưởng code 
 Đúng giờ thì
--B1: Sẽ vào trang web 
--B2:+Dùng while True để chạy nhập biển số,chọn loại xe tự động
+- B1: Sẽ vào trang web 
+- B2:+Dùng while True để chạy nhập biển số,chọn loại xe tự động
     +Sau khi nhập xong thì tìm tới ảnh captchas chụp lại , sau đó xử lý ảnh chuyển xám và tăng đồ tương phản anh lên
     +Xong dùng thư viện pytesseract lấy chữ số trong cap cha ra và bỏ khoảng trắng đầu và cuối
     +Chuyển sang nhận theo kiểu a-z0-9 ,và lấy 6 ký tự đầu 
     +Nhập 6 ký tự đầu  đó và ô text captchas và bấm tra cứu
-B3: Nếu nhập và tra cứu đúng thì hiển thị : thời gian,hành vi và trạng thái, ngược lại nếu sai captchas thì refect sau đó chạy lại bước 2: đến khi nào đúng.
+- B3: Nếu nhập và tra cứu đúng thì hiển thị : thời gian,hành vi và trạng thái, ngược lại nếu sai captchas thì refect sau đó chạy lại bước 2: đến khi nào đúng.
     
 
 
